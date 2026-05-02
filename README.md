@@ -66,7 +66,10 @@ Quelques décisions valent la peine d'être expliquées :
 •	Convention de nommage v_<Dim|Fact><Domaine> sur l'ensemble des vues, schéma dbo explicite, headers normalisés (Purpose, Grain, Dependencies, Consumers, Conventions, Change log). Le but : qu'un autre analyste puisse reprendre le projet sans se poser de questions sur la grain ou les dépendances de chaque vue.
 
 **Stack**
-SQL Server (T-SQL, vues) pour la préparation. Power BI Desktop avec DAX pour la modélisation, les mesures et la visualisation. Tabular Editor pour le nettoyage du modèle. Git pour le versioning.
+SQL Server (T-SQL, vues) pour la préparation. 
+Power BI Desktop avec DAX pour la modélisation, les mesures et la visualisation. 
+Tabular Editor pour le nettoyage du modèle. 
+Git pour le versioning.
 
 Ce que je voulais montrer avec ce projet
 Plus que le rapport en lui-même, ce projet m'a servi donner un aperçu de la réalité sur le terrain à savoir à mettre bout à bout la chaîne complète : récupérer des données dans un ERP, en faire quelque chose de propre côté entrepôt, modéliser pour l'analyse, et arriver à un livrable utilisable par un métier. C'est aussi l'occasion de montrer que je sais travailler sur de la donnée réelle avec ses contraintes (anonymisation, lettrage, dates multiples, montants signés) plutôt que sur un dataset Kaggle déjà mâché.
