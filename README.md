@@ -1,4 +1,4 @@
-# "Dashboard Power BI :Balance Âgée Clients"
+# Dashboard Power BI pour Balance Âgée Clients
 
 **Cas pratique end-to-end : Sage 1000 → SQL Server → Power BI**
 
