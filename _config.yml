@@ -3,7 +3,8 @@ description: "Construction d'un dashboard de pilotage du recouvrement"
 show_downloads: true
 theme: minima
 lang: fr
-header_pages: about.md
+header_pages: 
+        - about.md
 github:
   zip_url: http://example.com/download.zip
   another_url: another value
