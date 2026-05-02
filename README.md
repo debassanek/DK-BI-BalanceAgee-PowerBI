@@ -1,5 +1,3 @@
-# Dashboard Power BI : Balance âgée clients
-
 **Cas pratique end-to-end : Sage 1000 → SQL Server → Power BI**
 
 Un projet personnel construit autour d'un cas réel : la balance âgée client à partir de données Sage 1000. C'est un sujet qui semble simple sur le papier (qui doit combien, depuis quand) mais qui devient vite illisible dès qu'on l'attaque dans les écrans natifs d'un ERP. L'idée du projet était de partir d'un export brut, de tout reconstruire proprement côté SQL, et d'arriver à un rapport sur lequel une équipe finance pourrait réellement s'appuyer pour piloter son recouvrement.
@@ -22,7 +20,7 @@ Le rapport est structuré en quatre pages, chacune répond à un usage précis.
 
 ### Page 1- La synthèse
 
-![Vue synthèse — KPI clés et répartition par tranche de retard](https://raw.githubusercontent.com/debassanek/DK-BI-BalanceAgee-PowerBI/main/img/01_Vue%20Synth%C3%A9tique_BA_DK-BI-BalanceAgee.png)
+![Vue synthèse- KPI clés et répartition par tranche de retard](https://raw.githubusercontent.com/debassanek/DK-BI-BalanceAgee-PowerBI/main/img/01_Vue%20Synth%C3%A9tique_BA_DK-BI-BalanceAgee.png)
 
 *Vue synthèse : KPI clés et répartition par tranche de retard.*
 
@@ -64,11 +62,12 @@ Le schéma ci-dessus reprend le flux de bout en bout. On part des tables natives
 
 Cinq vues, toutes préfixées `v_` et schéma-qualifiées dans `dbo`, suivent une convention dim/fact explicite :
 
-- `v_FactBalanceAgee` — la table de faits, au grain « 1 ligne par échéance ». Elle calcule le restant dû signé (positif pour une créance, négatif pour un trop-perçu), les jours de retard et la tranche d'ancienneté par rapport à une date de référence dynamique.
-- `v_DimDate` — table de dates contiguë générée via tally pattern (sans `MAXRECURSION`, donc déployable en vue), qui sert de Date Table marquée dans Power BI.
-- `v_DimTiers`, `v_DimTiersRole`, `v_DimSociete` — référentiels tiers, rôle et société, alignés par clé composite `oidShare | oid | oidTiers`.
+- `v_FactBalanceAgee`- la table de faits, au grain « 1 ligne par échéance ». Elle calcule le restant dû signé (positif pour une créance, négatif pour un trop-perçu), les jours de retard et la tranche d'ancienneté par rapport à une date de référence dynamique.
+- `v_DimDate`- table de dates contiguë générée via tally pattern (sans `MAXRECURSION`, donc déployable en vue), qui sert de Date Table marquée dans Power BI.
+- `v_DimTiers`, `v_DimTiersRole`, `v_DimSociete`- référentiels tiers, rôle et société, alignés par clé composite `oidShare | oid | oidTiers`.
 
-La date de référence est portée par une table de paramétrage `dbo.PARAMETRE_DATE` jointe en `CROSS JOIN` à la fact — changer cette ligne suffit à rejouer toute la balance à n'importe quel point dans le passé, depuis Power BI ou n'importe quel autre client SQL.
+La date de référence est portée par une table de paramétrage `dbo.PARAMETRE_DATE` jointe en `CROSS JOIN` à la fact
+- changer cette ligne suffit à rejouer toute la balance à n'importe quel point dans le passé, depuis Power BI ou n'importe quel autre client SQL.
 
 ### Côté modèle
 
@@ -97,18 +96,18 @@ SQL Server (T-SQL, vues) pour la préparation. Power BI Desktop avec DAX pour la
 
 Plus que le rapport en lui-même, ce projet m'a servi à donner un aperçu de la réalité sur le terrain : à savoir mettre bout à bout la chaîne complète, récupérer des données dans un ERP, en faire quelque chose de propre côté entrepôt, modéliser pour l'analyse, et arriver à un livrable utilisable par un métier. C'est aussi l'occasion de montrer que je sais travailler sur de la donnée réelle avec ses contraintes (anonymisation, lettrage, dates multiples, montants signés) plutôt que sur un dataset Kaggle déjà mâché.
 
-Côté métier, ça illustre que je comprends de quoi parle un credit manager — la différence entre échu et non échu, pourquoi la tranche 61-90 fait peur, à quoi sert un DPM réel, ce que masque un total net positif quand un avoir traîne.
+Côté métier, ça illustre que je comprends de quoi parle un credit manager : la différence entre échu et non échu, pourquoi la tranche 61-90 fait peur, à quoi sert un DPM réel, ce que masque un total net positif quand un avoir traîne.
 
 ## Code source et ressources
 
 | Ressource | Fichier |
 |---|---|
-| [Fact `v_FactBalanceAgee`](https://github.com/debassanek/DK-BI-BalanceAgee-PowerBI/blob/main/sql/05_fact_balance_agee_DK-BI-BalanceAgee.sql) | `05_fact_balance_agee.sql` |
-| [Dim `v_DimDate`](https://github.com/debassanek/DK-BI-BalanceAgee-PowerBI/blob/main/sql/01_dim_date_DK-BI-BalanceAgee.sql) | `01_dim_date.sql` |
-| [Dim `v_DimSociete`](https://github.com/debassanek/DK-BI-BalanceAgee-PowerBI/blob/main/sql/02_dim_societe_DK-BI-BalanceAgee.sql) | `02_dim_societe.sql` |
-| [Dim `v_DimTiers`](https://github.com/debassanek/DK-BI-BalanceAgee-PowerBI/blob/main/sql/03_dim_tiers_DK-BI-BalanceAgee.sql) | `03_dim_tiers.sql` |
-| [Dim `v_DimTiersRole`](https://github.com/debassanek/DK-BI-BalanceAgee-PowerBI/blob/main/sql/04_dim_tiers_role_DK-BI-BalanceAgee.sql) | `04_dim_tiers_role.sql` |
-| [Rapport Power BI complet](https://github.com/debassanek/DK-BI-BalanceAgee-PowerBI/blob/main/Ressources/DK-BI-BalanceAgee_Report.pbix) | `DK-BI-BalanceAgee_Report.pbix` |
+| Fact v_FactBalanceAgee|[`05_fact_balance_agee.sql`](https://github.com/debassanek/DK-BI-BalanceAgee-PowerBI/blob/main/sql/05_fact_balance_agee_DK-BI-BalanceAgee.sql) |
+| Dim v_DimDate | [`01_dim_date.sql`](https://github.com/debassanek/DK-BI-BalanceAgee-PowerBI/blob/main/sql/01_dim_date_DK-BI-BalanceAgee.sql) |
+| Dim v_DimSociete | [`02_dim_societe.sql`](https://github.com/debassanek/DK-BI-BalanceAgee-PowerBI/blob/main/sql/02_dim_societe_DK-BI-BalanceAgee.sql) |
+| Dim v_DimTiers | [`03_dim_tiers.sql`](https://github.com/debassanek/DK-BI-BalanceAgee-PowerBI/blob/main/sql/03_dim_tiers_DK-BI-BalanceAgee.sql) |
+| Dim v_DimTiersRole | [`04_dim_tiers_role.sql`](https://github.com/debassanek/DK-BI-BalanceAgee-PowerBI/blob/main/sql/04_dim_tiers_role_DK-BI-BalanceAgee.sql) |
+| Rapport Power BI complet | [`DK-BI-BalanceAgee_Report.pbix`](https://github.com/debassanek/DK-BI-BalanceAgee-PowerBI/blob/main/Ressources/DK-BI-BalanceAgee_Report.pbix)|
 
 ## Pistes d'évolution
 
@@ -117,5 +116,7 @@ Si je devais reprendre le projet, je regarderais : un passage en DirectQuery pou
 ---
 
 **Debassane K.**
+
 Data & BI
+
 *[debassanek@gmail.com](mailto:debassanek@gmail.com)*
