@@ -1,6 +1,7 @@
 title: "DK-BI-BalanceAgee-PowerBI"
-logo: img/dk
-description: "Construction d'un dasboard de pilotage du recouvrement"
+description: "Construction d'un dashboard de pilotage du recouvrement"
 show_downloads: true
 theme: minima
 lang: fr
+header_pages:
+  - about.md
