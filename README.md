@@ -1,4 +1,4 @@
-# Dashboard Power BI pour Balance Âgée Clients
+## Dashboard Power BI pour Balance Âgée Clients
 
 **Cas pratique end-to-end : Sage 1000 → SQL Server → Power BI**
 
@@ -117,8 +117,6 @@ Si je devais reprendre le projet, je regarderais : un passage en DirectQuery pou
 
 ---
 
-**Debassane K.**
-
-Data & BI
-
-*[debassanek@gmail.com](mailto:debassanek@gmail.com)*
+|**Debassane K.**
+|Data & BI
+|*[debassanek@gmail.com](mailto:debassanek@gmail.com)*
