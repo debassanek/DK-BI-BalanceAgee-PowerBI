@@ -43,6 +43,7 @@ Architecture technique end-to-end : Sage 1000 → SQL Server → Power BI
 Le schéma ci-dessus reprend le flux de bout en bout. On part des tables natives de Sage 1000 dans la base source, on construit une couche de vues SQL qui matérialisent la logique métier (calcul du restant dû, rattachement aux dimensions, table de dates contiguë), Power BI s'appuie ensuite sur ce socle propre pour exposer un modèle en étoile et une vingtaine de mesures DAX, restituées dans un rapport quatre pages destiné aux équipes finance. Les couches transverses - anonymisation, paramétrage de la date de référence, documentation et industrialisation du modèle - accompagnent chaque étape.
 
 ***Côté SQL***
+
 Cinq vues, toutes préfixées v_ et schéma-qualifiées dans dbo, suivent une convention dim/fact explicite :
 •	v_FactBalanceAgee - la table de faits, au grain « 1 ligne par échéance ». Elle calcule le restant dû signé (positif pour une créance, négatif pour un trop-perçu), les jours de retard et la tranche d'ancienneté par rapport à une date de référence dynamique.
 •	v_DimDate - table de dates contiguë générée via tally pattern (sans MAXRECURSION, donc déployable en vue), qui sert de Date Table marquée dans Power BI.
@@ -50,9 +51,11 @@ Cinq vues, toutes préfixées v_ et schéma-qualifiées dans dbo, suivent une co
 La date de référence est portée par une table de paramétrage dbo.PARAMETRE_DATE jointe en CROSS JOIN à la fact - changer cette ligne suffit à rejouer toute la balance à n'importe quel point dans le passé, depuis Power BI ou n'importe quel autre client SQL.
 
 ***Côté modèle***
+
 Schéma en étoile classique : une table de faits, quatre dimensions. v_DimDate est marquée comme Date Table, avec la relation active sur la date d'échéance et deux relations inactives sur la date de pièce et la date de lettrage, activables au cas par cas via USERELATIONSHIP. Ça évite les ambiguïtés et permet de répondre à plusieurs questions temporelles avec le même modèle.
 
 ***Côté DAX***
+
 Une dizaine de mesures de base (solde, échu, non échu, retard moyen pondéré, niveau de risque) et quelques mesures de variation (M/M, % cumulé). Après une première version qui traînait des vieilles mesures de test, j'ai fait une passe de nettoyage : 19 mesures finales rangées en cinq dossiers, format strings homogènes, code mort supprimé. Le pack de cleanup (audit Excel + script Tabular Editor + changelog) est versionné dans le repo.
 
 **Choix techniques que j'assume**
@@ -66,16 +69,19 @@ Quelques décisions valent la peine d'être expliquées :
 •	Convention de nommage v_<Dim|Fact><Domaine> sur l'ensemble des vues, schéma dbo explicite, headers normalisés (Purpose, Grain, Dependencies, Consumers, Conventions, Change log). Le but : qu'un autre analyste puisse reprendre le projet sans se poser de questions sur la grain ou les dépendances de chaque vue.
 
 **Stack**
+
 SQL Server (T-SQL, vues) pour la préparation. 
 Power BI Desktop avec DAX pour la modélisation, les mesures et la visualisation. 
 Tabular Editor pour le nettoyage du modèle. 
 Git pour le versioning.
 
-Ce que je voulais montrer avec ce projet
+**Ce que je voulais montrer avec ce projet**
+
 Plus que le rapport en lui-même, ce projet m'a servi donner un aperçu de la réalité sur le terrain à savoir à mettre bout à bout la chaîne complète : récupérer des données dans un ERP, en faire quelque chose de propre côté entrepôt, modéliser pour l'analyse, et arriver à un livrable utilisable par un métier. C'est aussi l'occasion de montrer que je sais travailler sur de la donnée réelle avec ses contraintes (anonymisation, lettrage, dates multiples, montants signés) plutôt que sur un dataset Kaggle déjà mâché.
 Côté métier, ça illustre que je comprends de quoi parle un credit manager - la différence entre échu et non échu, pourquoi la tranche 61-90 fait peur, à quoi sert un DPM réel, ce que masque un total net positif quand un avoir traîne.
 
 **Code source et ressources**
+
 Ressource	Lien
 Fact v_FactBalanceAgee	Vues SQL/05_fact_balance_agee.sql
 Dim v_DimDate	Vues SQL/01_dim_date.sql
@@ -87,7 +93,10 @@ Pack de nettoyage DAX	02_Cleanup_Mesures_DAX/
 Captures du rapport	racine du dossier
 
 **Pistes d'évolution**
+
 Si je devais reprendre le projet, je regarderais : un passage en DirectQuery pour rafraîchir en temps réel sur le périmètre récent, un scoring du risque d'impayé un peu plus fin (un modèle simple suffirait, pas besoin de ML), des alertes Power Automate sur dépassement de seuil, et la mise en place d'un Row-Level Security par société pour pouvoir partager le rapport à plusieurs entités sans tout cloisonner manuellement.
 
 
-**Debassane K.** — *Data & BI* debassanek@gmail.com
+**Debassane K.** 
+Data & BI
+*debassanek@gmail.com*
