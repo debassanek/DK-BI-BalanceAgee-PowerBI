@@ -1,6 +1,5 @@
-# DK-BI-BalanceAgee-PowerBI
+# Dashboard Power BI — Balance Âgée Clients
 
-# Dashboard Power BI — Balance Âgée Clients 
 **Cas pratique end-to-end : Sage 1000 → SQL Server → Power BI** 
 
 Un projet personnel construit autour d'un cas réel : la balance âgée client à partir de données Sage 1000. C'est un sujet qui semble simple sur le papier (qui doit combien, depuis quand) mais qui devient vite illisible dès qu'on l'attaque dans les écrans natifs d'un ERP. L'idée du projet était de partir d'un export brut, de tout reconstruire proprement côté SQL, et d'arriver à un rapport sur lequel une équipe finance pourrait réellement s'appuyer pour piloter son recouvrement.
