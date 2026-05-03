@@ -1,10 +1,5 @@
 title: "Dashboard de pilotage du recouvrement"
 description: "DK-BI-BalanceAgee-PowerBI"
 show_downloads: false
-remote_theme: pages-themes/cayman@v0.2.0
+theme: jekyll-theme-cayman
 lang: fr
-header_pages: 
-        - about.md
-github:
-  zip_url: http://example.com/download.zip
-  another_url: another value
