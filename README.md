@@ -35,7 +35,7 @@ C'est la « page d'atterrissage » dU pilotage. Elle est conçue pour répondre 
 
 ![Matrice client × tranche de retard et Pareto des 10 plus gros encours](https://raw.githubusercontent.com/debassanek/DK-BI-BalanceAgee-PowerBI/main/img/02_D%C3%A9tail_BA_DK-BI-BalanceAgee.png)
 
-*Matrice client × tranche de retard et Pareto des 10 plus gros encours.*
+*Détail des créances et Pareto des 10 plus gros encours.*
 
 C'est la page de diagnostic et d'action. Si la synthèse répondait à "Est-ce que j'ai un problème ?", cette page répond à "Où est-il exactement, et qui est concerné ?"
 C'est la page que pourrait utiliser par exemple un credit manager ou un responsable recouvrement au quotidien.
