@@ -28,7 +28,7 @@ Le rapport est structuré en quatre pages, chacune répond à un usage précis.
 
 C'est la page d'entrée. Cinq KPI en haut (solde des créances, encours à risque au-delà de 60 jours, % de risque crédit moyen et sur le segment +90j, niveau de risque sur 5), et en dessous la répartition du solde par tranche de retard. À cette date de référence (juin 2022 sur la capture), on voit immédiatement que le risque se concentre sur les tranches au-delà de 60 jours, ce qui change la lecture par rapport au seul total brut de 14,7 M€. La présence d'un solde négatif sur la tranche 31-60 j signale aussi des avoirs ou des trop-perçus à investiguer.
 
-### Le détail par tranche
+### Le détail selon la tranche de retard
 
 ![Matrice client × tranche de retard et Pareto des 10 plus gros encours](https://raw.githubusercontent.com/debassanek/DK-BI-BalanceAgee-PowerBI/main/img/02_D%C3%A9tail_BA_DK-BI-BalanceAgee.png)
 
@@ -36,7 +36,7 @@ C'est la page d'entrée. Cinq KPI en haut (solde des créances, encours à risqu
 
 Une matrice client × tranche de retard avec un dégradé de couleur, doublée d'un Pareto sur les 10 plus gros encours. C'est la page que j'ouvrirais en premier en tant que credit manager : elle dit en deux secondes par où commencer la relance. Les valeurs négatives ressortent, ce qui force à les traiter à part — un avoir non rapproché peut camoufler un vrai retard sous un total apparemment équilibré.
 
-### L'évolution dans le temps
+### L'évolution du solde dans le temps
 
 ![Variation Mois sur Mois et part cumulée des créances par tranche](https://raw.githubusercontent.com/debassanek/DK-BI-BalanceAgee-PowerBI/main/img/03_Evolution%20temporelle_BA_DK-BI-BalanceAgee.png)
 
