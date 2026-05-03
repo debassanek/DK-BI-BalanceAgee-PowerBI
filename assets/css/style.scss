@@ -44,9 +44,14 @@ pre,
   font-family: 'Fira Code', 'JetBrains Mono', Consolas, "Liberation Mono", Menlo, Courier, monospace;
 }
 
-/* ---------- Titres dans le contenu (anciennement verts) ---------- */
+/* ---------- Titres dans le contenu ---------- */
+/* h1 et h2 = titres principaux en bleu nuit */
 .main-content h1,
-.main-content h2,
+.main-content h2 {
+  color: #1e3a5f;
+}
+
+/* h3 à h6 = sous-titres en doré */
 .main-content h3,
 .main-content h4,
 .main-content h5,
@@ -62,10 +67,10 @@ pre,
 
 /* ---------- Liens (accord avec la palette) ---------- */
 .main-content a {
-  color: #b8860b;
+  color: #1e3a5f;
 }
 .main-content a:hover {
-  color: #8b6508;
+  color: #b8860b;
 }
 
 /* ---------- Boutons de la bannière ---------- */
