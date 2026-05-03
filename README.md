@@ -26,15 +26,23 @@ Le rapport est structuré en quatre pages, chacune répond à un usage précis.
 
 *Vue synthèse : KPI clés et répartition par tranche de retard.*
 
-C'est la page d'entrée. Cinq KPI en haut (solde des créances, encours à risque au-delà de 60 jours, % de risque crédit moyen et sur le segment +90j, niveau de risque sur 5), et en dessous la répartition du solde par tranche de retard. À cette date de référence (juin 2022 sur la capture), on voit immédiatement que le risque se concentre sur les tranches au-delà de 60 jours, ce qui change la lecture par rapport au seul total brut de 14,7 M€. La présence d'un solde négatif sur la tranche 31-60 j signale aussi des avoirs ou des trop-perçus à investiguer.
+C'est la « page d'atterrissage » dU pilotage. Elle est conçue pour répondre en moins de 10 secondes à la question : "Est-ce que j'ai un problème de recouvrement en ce moment ?" Elle a ici trois rôles principaux : 
+- Donner une photographie instantanée par l'agrègation en quelques KPIs les grandeurs essentielles 
+- Donner une lisibilité immédiate, même par un non-financier, permettant de qualifier la gravité de la situation.
+- Orienter la navigation vers les pages de détail
 
-### Le détail selon la tranche de retard
+### Le détail 
 
 ![Matrice client × tranche de retard et Pareto des 10 plus gros encours](https://raw.githubusercontent.com/debassanek/DK-BI-BalanceAgee-PowerBI/main/img/02_D%C3%A9tail_BA_DK-BI-BalanceAgee.png)
 
 *Matrice client × tranche de retard et Pareto des 10 plus gros encours.*
 
-Une matrice client × tranche de retard avec un dégradé de couleur, doublée d'un Pareto sur les 10 plus gros encours. C'est la page que j'ouvrirais en premier en tant que credit manager : elle dit en deux secondes par où commencer la relance. Les valeurs négatives ressortent, ce qui force à les traiter à part — un avoir non rapproché peut camoufler un vrai retard sous un total apparemment équilibré.
+C'est la page de diagnostic et d'action. Si la synthèse répondait à "Est-ce que j'ai un problème ?", cette page répond à "Où est-il exactement, et qui est concerné ?"
+C'est la page que pourrait utiliser par exemple un credit manager ou un responsable recouvrement au quotidien.
+Ce qu'elle apporte en plus de la synthèse :
+- L'identification nominative des débiteurs grâce au tableau du bas, le cœur de la page.
+- La courbe Pareto des top 10 clients combiné à l'histogramme qui montre que 2 ou 3 clients suffisent à représenter 50% du solde dû.
+- La reprise des tranches mais avec une lecture inversée par rapport à la synthèse : ici on compare visuellement le poids relatif de chaque tranche d'un coup d'œil.
 
 ### L'évolution du solde dans le temps
 
@@ -42,7 +50,7 @@ Une matrice client × tranche de retard avec un dégradé de couleur, doublée d
 
 *Variation Mois sur Mois et part cumulée des créances par tranche.*
 
-La même information, mais en mouvement : variation mois sur mois, répartition mensuelle empilée par tranche, et part cumulée des créances par tranche. Utile pour voir si une dérive s'installe ou si une action de relance a réellement produit un effet.
+C'est la page de tendance et de pilotage dans le temps. Si la Synthèse répondait à "Ai-je un problème ?" et le Détail à "Qui est concerné ?", cette page répond à "Est-ce que la situation s'améliore ou se dégrade ?". C'est la page de l'équipe financière qui suit l'efficacité de sa politique de recouvrement sur la durée.
 
 ### La fiche client
 
@@ -58,7 +66,7 @@ Accessible en drill-through depuis n'importe quelle page : on clique-droit sur u
 
 *Architecture technique end-to-end : Sage 1000 → SQL Server → Power BI.*
 
-Le schéma ci-dessus reprend le flux de bout en bout. On part des tables natives de Sage 1000 dans la base source, on construit une couche de vues SQL qui matérialisent la logique métier (calcul du restant dû, rattachement aux dimensions, table de dates contiguë), Power BI s'appuie ensuite sur ce socle propre pour exposer un modèle en étoile et une vingtaine de mesures DAX, restituées dans un rapport quatre pages destiné aux équipes finance. Les couches transverses — anonymisation, paramétrage de la date de référence, documentation et industrialisation du modèle — accompagnent chaque étape.
+Le schéma ci-dessus reprend le flux de bout en bout. On part des tables natives de Sage 1000 dans la base source, on construit une couche de vues SQL qui matérialisent la logique métier (calcul du restant dû, rattachement aux dimensions, table de dates contiguë), Power BI s'appuie ensuite sur ce socle propre pour exposer un modèle en étoile et une vingtaine de mesures DAX, restituées dans un rapport quatre pages destiné aux équipes finance. Les couches transverses (anonymisation, paramétrage de la date de référence, documentation et industrialisation du modèle) accompagnent chaque étape.
 
 ### Côté SQL
 
